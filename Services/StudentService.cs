@@ -16,28 +16,34 @@ namespace StudentManagement_API_Dotnet.Services
 
 
         public Student CreateStudent(Student student)
-        {
-            throw new NotImplementedException();
+        { 
+            _students.InsertOne(student);
+            return student;
         }
 
         public Student GetStudent(string id)
         {
-            throw new NotImplementedException();
+
+            return _students.Find(student => student.Id==id).FirstOrDefault();
         }
 
         public List<Student> GetStudents()
-        {
-            throw new NotImplementedException();
+        { 
+          
+           return _students.Find(student=>true).ToList();
+
         }
 
         public void RemoveStudent(string id)
         {
-            throw new NotImplementedException();
+             _students.DeleteOne(student => student.Id == id) ;
         }
 
         public void UpdateStudent(string id, Student student)
         {
-            throw new NotImplementedException();
+
+              _students.ReplaceOne(student => student.Id == id,student) ;
+
         }
     }
 }
