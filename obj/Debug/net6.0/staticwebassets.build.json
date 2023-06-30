@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Fv5mudNzigUbTuR813bcet14f4K8JOdtsH1N5XGDupk=",
+  "Source": "StudentManagement_API_Dotnet",
+  "BasePath": "_content/StudentManagement_API_Dotnet",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

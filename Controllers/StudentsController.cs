@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentManagement_API_Dotnet.Models;
+using StudentManagement_API_Dotnet.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,23 +11,39 @@ namespace StudentManagement_API_Dotnet.Controllers
     public class StudentsController : ControllerBase
     {
         // GET: api/<StudentsController>
+         
+        private readonly IStudentService _studentService;
+        StudentsController(IStudentService studentService) {
+          this._studentService=studentService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<List<Student>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _studentService.GetStudents();
         }
 
         // GET api/<StudentsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<Student> Get(string id)
         {
-            return "value";
+            var student= _studentService.GetStudent(id);
+
+            if(student!=null)
+            {
+                return NotFound($" Student with Id={id} not found");
+            }
+
+            return student;
         }
 
         // POST api/<StudentsController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
+
+            
+
         }
 
         // PUT api/<StudentsController>/5

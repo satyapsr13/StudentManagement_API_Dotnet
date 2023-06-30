@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<StudentStoreDatabaseSettings>(builder.Configuration.GetSection(nameof(StudentStoreDatabaseSettings)));
 
 
-builder.Services.AddSingleton<IStudentStoreDatabaseSettings>(sp=>sp.GetRequiredService<IOptions<StudentStoreDatabaseSettings>>().Value;
+builder.Services.AddSingleton<IStudentStoreDatabaseSettings>(sp=>sp.GetRequiredService<IOptions<StudentStoreDatabaseSettings>>().Value);
 
 builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(builder.Configuration.GetValue<string>("StudentStoreDatabaseSettings:ConnectionString")));
 
