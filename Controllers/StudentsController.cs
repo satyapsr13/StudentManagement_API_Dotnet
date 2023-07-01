@@ -39,23 +39,46 @@ namespace StudentManagement_API_Dotnet.Controllers
 
         // POST api/<StudentsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Student> Post([FromBody] Student student)
         {
+            _studentService.CreateStudent(student);
 
+            return CreatedAtAction(nameof(Get), new {id=student.Id}, student);  
             
 
         }
 
         // PUT api/<StudentsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(string id, [FromBody] Student student)
         {
+
+            var existingStudent = _studentService.GetStudent(id);
+            if(existingStudent==null) {
+                return NotFound($"Student with Id= {id} not found");
+                    
+                    }
+
+            _studentService.UpdateStudent(id, student);
+            return NoContent();
+        
+        
         }
 
         // DELETE api/<StudentsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(string id)
         {
+
+            var existingStudent = _studentService.GetStudent(id);
+            if (existingStudent == null)
+            {
+                return NotFound($"Student with Id= {id} not found");
+
+            }
+
+            _studentService.RemoveStudent(id);
+            return Ok($"Student with Id= {id} Deleted");
         }
     }
 }
